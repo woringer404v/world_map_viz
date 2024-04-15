@@ -18,7 +18,7 @@ const path = d3.geoPath()
     .projection(projection);
 
 // Load and display the World Atlas JSON
-d3.json("path_to_your_geojson_file/world.geojson").then(function(data) {
+d3.json("data/world.geojson").then(function(data) {
     svg.selectAll("path")
         .data(data.features)
         .enter()
