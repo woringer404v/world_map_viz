@@ -1,24 +1,29 @@
-// The svg
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+// Width and height
+const width = 960;
+const height = 500;
 
-// Map and projection
-var projection = d3.geoNaturalEarth1()
-    .scale(width / 1.3 / Math.PI)
+// Create SVG element
+const svg = d3.select("#map")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+// Define map projection
+const projection = d3.geoMercator()
     .translate([width / 2, height / 2])
+    .scale(100);
 
-// Load external data and boot
-d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
+// Define path generator
+const path = d3.geoPath()
+    .projection(projection);
 
-    // Draw the map
-    svg.append("g")
-        .selectAll("path")
+// Load and display the World Atlas JSON
+d3.json("data/world.geojson").then(function(data) {
+    svg.selectAll("path")
         .data(data.features)
-        .enter().append("path")
-            .attr("fill", "#69b3a2")
-            .attr("d", d3.geoPath()
-                .projection(projection)
-            )
-            .style("stroke", "#fff")
-})
+        .enter()
+        .append("path")
+        .attr("d", path)
+        .attr("fill", "#ccc")
+        .attr("stroke", "#333");
+});
