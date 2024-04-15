@@ -1,5 +1,3 @@
-<script>
-
 // The svg
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
@@ -24,5 +22,3 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
             )
             .style("stroke", "#fff")
 })
-
-</script>
